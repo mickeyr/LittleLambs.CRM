@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
+using LittleLambs.CRM.Core.Base;
 using LittleLambs.CRM.Core.Entities;
 
 namespace LittleLambs.CRM.Core.DataAccess
@@ -10,6 +11,7 @@ namespace LittleLambs.CRM.Core.DataAccess
 	{
 		T Get(Guid id);
 		IEnumerable<T> GetAll();
+		IPagedList<T> GetPagedList(int page, int pageSize);
 		void Delete(Guid id);
 		T Upsert(T entity);
 	}
@@ -28,6 +30,14 @@ namespace LittleLambs.CRM.Core.DataAccess
 		{
 			Contract.Ensures(Contract.Result<IEnumerable<T>>() != null);
 			return default(IEnumerable<T>);
+		}
+
+		public IPagedList<T> GetPagedList(int page, int pageSize)
+		{
+			Contract.Requires<ArgumentOutOfRangeException>(page >= 1, "page >= 1");
+			Contract.Requires<ArgumentOutOfRangeException>(pageSize >= 1, "pageSize >= 1");
+			Contract.Ensures(Contract.Result<IPagedList<T>>() != null);
+			return default(IPagedList<T>);
 		}
 
 		public void Delete(Guid id)

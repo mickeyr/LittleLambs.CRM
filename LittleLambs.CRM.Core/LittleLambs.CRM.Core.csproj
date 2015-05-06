@@ -89,9 +89,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Base\IMediator.cs" />
+    <Compile Include="Base\IPagedList.cs" />
     <Compile Include="Base\IRequest.cs" />
     <Compile Include="Base\IRequestHandler.cs" />
     <Compile Include="Base\Mediator.cs" />
+    <Compile Include="Base\PagedList.cs" />
     <Compile Include="Customers\Commands\CreateCustomerRequest.cs" />
     <Compile Include="Customers\Commands\CreateCustomerHandler.cs">
       <DependentUpon>CreateCustomerRequest.cs</DependentUpon>
@@ -101,6 +103,8 @@
     <Compile Include="Customers\Queries\GetCustomerHandler.cs">
       <DependentUpon>GetCustomerRequest.cs</DependentUpon>
     </Compile>
+    <Compile Include="Customers\Queries\GetPagedListOfCustomersHandler.cs" />
+    <Compile Include="Customers\Queries\GetPagedListOfCustomersRequest.cs" />
     <Compile Include="DataAccess\IRepository.cs" />
     <Compile Include="DataAccess\IUnitOfWork.cs" />
     <Compile Include="DataAccess\IUnitOfWorkFactory.cs" />

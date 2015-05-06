@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using LittleLambs.CRM.Core.Base;
 using LittleLambs.CRM.Core.Customers;
 
 namespace LittleLambs.CRM.Tests.Fakes
@@ -22,6 +23,15 @@ namespace LittleLambs.CRM.Tests.Fakes
 		public IEnumerable<Customer> GetAll()
 		{
 			return _customers;
+		}
+
+		public IPagedList<Customer> GetPagedList(int page, int pageSize)
+		{
+			var items = _customers
+				.Skip(page*pageSize)
+				.Take(pageSize)
+				.AsEnumerable();
+			return new PagedList<Customer>(items, page, pageSize, _customers.Count);
 		}
 
 		public void Delete(Guid id)
