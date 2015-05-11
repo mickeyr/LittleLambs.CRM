@@ -105,7 +105,9 @@
     <Compile Include="Customers\Queries\GetCustomerHandler.cs">
       <DependentUpon>GetCustomerRequest.cs</DependentUpon>
     </Compile>
-    <Compile Include="Customers\Queries\GetPagedListOfCustomersHandler.cs" />
+    <Compile Include="Customers\Queries\GetPagedListOfCustomersHandler.cs">
+      <DependentUpon>GetPagedListOfCustomersRequest.cs</DependentUpon>
+    </Compile>
     <Compile Include="Customers\Queries\GetPagedListOfCustomersRequest.cs" />
     <Compile Include="DataAccess\IRepository.cs" />
     <Compile Include="DataAccess\IUnitOfWork.cs" />
