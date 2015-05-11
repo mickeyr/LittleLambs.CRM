@@ -1,6 +1,7 @@
 ﻿using Autofac;
 using Autofac.Features.Variance;
-using LittleLambs.CRM.Core.Base;
+using LittleLambs.CRM.Core.DataAccess;
+using MediatR;
 
 namespace LittleLambs.CRM.DependencyInjection
 {
@@ -10,11 +11,7 @@ namespace LittleLambs.CRM.DependencyInjection
 		{
 			builder.RegisterSource(new ContravariantRegistrationSource());
 			builder.RegisterAssemblyTypes(typeof (IMediator).Assembly).AsImplementedInterfaces();
-			builder.Register<HandlerFactory>(ctx =>
-			{
-				var c = ctx.Resolve<IComponentContext>();
-				return t => c.Resolve(t);
-			});
+			builder.RegisterAssemblyTypes(typeof (IRepository<>).Assembly).AsImplementedInterfaces();
 		}
 	}
 }

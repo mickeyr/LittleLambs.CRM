@@ -1,8 +1,10 @@
-﻿using LittleLambs.CRM.Core.Base;
+﻿using System.Threading.Tasks;
+using LittleLambs.CRM.Core.Base;
+using MediatR;
 
 namespace LittleLambs.CRM.Core.Customers.Queries
 {
-	internal class GetPagedListOfCustomersHandler : IRequestHandler<GetPagedListOfCustomersRequest, IPagedList<Customer>>
+	internal class GetPagedListOfCustomersHandler : IAsyncRequestHandler<GetPagedListOfCustomersRequest, IPagedList<Customer>>
 	{
 		private readonly ICustomerRepository _repository;
 
@@ -11,9 +13,9 @@ namespace LittleLambs.CRM.Core.Customers.Queries
 			_repository = repository;
 		}
 
-		public IPagedList<Customer> Handle(GetPagedListOfCustomersRequest request)
+		public Task<IPagedList<Customer>> Handle(GetPagedListOfCustomersRequest request)
 		{
-			return _repository.GetPagedList(request.PageSize, request.PageNumber);
+			return _repository.GetPagedListAsync(request.PageNumber, request.PageSize);
 		}
 	}
 }

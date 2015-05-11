@@ -1,5 +1,6 @@
 ﻿using System;
 using FluentAssertions;
+using LittleLambs.CRM.Core.Customers;
 using LittleLambs.CRM.Core.Entities;
 using Xunit;
 

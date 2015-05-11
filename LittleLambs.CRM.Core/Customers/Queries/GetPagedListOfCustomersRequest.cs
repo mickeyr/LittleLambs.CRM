@@ -1,8 +1,9 @@
 ﻿using LittleLambs.CRM.Core.Base;
+using MediatR;
 
 namespace LittleLambs.CRM.Core.Customers.Queries
 {
-	public class GetPagedListOfCustomersRequest : IRequest<IPagedList<Customer>>
+	public class GetPagedListOfCustomersRequest : IAsyncRequest<IPagedList<Customer>>
 	{
 		public GetPagedListOfCustomersRequest(int pageNumber, int pageSize)
 		{

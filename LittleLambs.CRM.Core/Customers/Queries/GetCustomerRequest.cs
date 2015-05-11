@@ -1,9 +1,9 @@
 ﻿using System;
-using LittleLambs.CRM.Core.Base;
+using MediatR;
 
 namespace LittleLambs.CRM.Core.Customers.Queries
 {
-	public class GetCustomerRequest : IRequest<Customer>
+	public class GetCustomerRequest : IAsyncRequest<Customer>
 	{
 		private readonly Guid _id;
 

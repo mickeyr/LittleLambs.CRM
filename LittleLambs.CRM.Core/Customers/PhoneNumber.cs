@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Diagnostics.Contracts;
+using LittleLambs.CRM.Core.Entities;
 using LittleLambs.CRM.Core.ExtensionMethods;
 using Value;
 
-namespace LittleLambs.CRM.Core.Entities
+namespace LittleLambs.CRM.Core.Customers
 {
 	public sealed class PhoneNumber : ValueObject
 	{

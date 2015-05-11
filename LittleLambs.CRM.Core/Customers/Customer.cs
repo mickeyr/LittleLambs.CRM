@@ -12,6 +12,7 @@ namespace LittleLambs.CRM.Core.Customers
 		private readonly List<Contact> _contactList;
 		private readonly Guid _id;
 		private readonly string _name;
+		private PhoneNumber _phoneNumber;
 
 		public Customer(string name)
 			: this(Guid.NewGuid(), name, new List<Address>(), new List<Contact>())
@@ -54,7 +55,11 @@ namespace LittleLambs.CRM.Core.Customers
 			}
 		}
 
-		public PhoneNumber PhoneNumber { get; set; }
+		public string PhoneNumber
+		{
+			get { return _phoneNumber.ToString(); }
+			set { _phoneNumber = Customers.PhoneNumber.Parse(value); }
+		}
 
 		public IEnumerable<Address> AddressList
 		{

@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Diagnostics.Contracts;
-using LittleLambs.CRM.Core.Base;
+using MediatR;
 
 namespace LittleLambs.CRM.Core.Customers.Commands
 {
-	public class CreateCustomerRequest : IRequest<Customer>
+	public class CreateCustomerRequest : IAsyncRequest<Customer>
 	{
 		private readonly string _name;
 

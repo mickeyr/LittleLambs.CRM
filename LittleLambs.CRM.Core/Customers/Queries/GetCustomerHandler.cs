@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Diagnostics.Contracts;
-using LittleLambs.CRM.Core.Base;
+using System.Threading.Tasks;
+using MediatR;
 
 namespace LittleLambs.CRM.Core.Customers.Queries
 {
-	internal class GetCustomerHandler : IRequestHandler<GetCustomerRequest, Customer>
+	internal class GetCustomerHandler : IAsyncRequestHandler<GetCustomerRequest, Customer>
 	{
 		private readonly ICustomerRepository _customerRepository;
 
@@ -15,10 +16,10 @@ namespace LittleLambs.CRM.Core.Customers.Queries
 			_customerRepository = customerRepository;
 		}
 
-		public Customer Handle(GetCustomerRequest query)
+		public Task<Customer> Handle(GetCustomerRequest query)
 		{
 			Contract.Ensures(Contract.Result<Customer>() != null);
-			return _customerRepository.Get(query.Id);
+			return _customerRepository.GetAsync(query.Id);
 		}
 
 		[ContractInvariantMethod]

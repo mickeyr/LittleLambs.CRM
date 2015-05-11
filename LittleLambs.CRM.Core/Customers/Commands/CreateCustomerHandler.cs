@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Diagnostics.Contracts;
+using System.Threading.Tasks;
 using LittleLambs.CRM.Core.Base;
 using LittleLambs.CRM.Core.DataAccess;
+using MediatR;
 
 namespace LittleLambs.CRM.Core.Customers.Commands
 {
-	internal class CreateCustomerHandler : IRequestHandler<CreateCustomerRequest, Customer>
+	internal class CreateCustomerHandler : IAsyncRequestHandler<CreateCustomerRequest, Customer>
 	{
 		private readonly ICustomerRepository _customerRepository;
 		private readonly IUnitOfWorkFactory _unitOfWorkFactory;
@@ -20,20 +22,23 @@ namespace LittleLambs.CRM.Core.Customers.Commands
 			_customerRepository = customerRepository;
 		}
 
-		public Customer Handle(CreateCustomerRequest query)
+		public Task<Customer> Handle(CreateCustomerRequest query)
 		{
 			Contract.Ensures(Contract.Result<Customer>() != null);
-
-			using (var uow = _unitOfWorkFactory.CreateUnitOfWork())
+			return Task.Factory.StartNew(() =>
 			{
-				Contract.Assume(
-					!string.IsNullOrWhiteSpace( query.Name ),
-					"The query paramater name is required to be nut null and not empty." );
-				var customer = new Customer(query.Name);
-				customer = _customerRepository.Upsert(customer);
-				uow.SaveChanges();
-				return customer;
-			}
+				using ( var uow = _unitOfWorkFactory.CreateUnitOfWork() )
+				{
+					Contract.Assume(
+						!string.IsNullOrWhiteSpace( query.Name ),
+						"The query paramater name is required to be nut null and not empty." );
+					var customer = new Customer( query.Name );
+					customer = _customerRepository.Upsert( customer );
+					uow.SaveChanges();
+					return customer;
+				}
+			});
+			
 		}
 
 		[ContractInvariantMethod]
