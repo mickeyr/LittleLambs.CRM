@@ -57,7 +57,11 @@ namespace LittleLambs.CRM.Core.Customers
 
 		public string PhoneNumber
 		{
-			get { return _phoneNumber.ToString(); }
+			get
+			{
+				Contract.Ensures(Contract.Result<string>() != null);
+				return _phoneNumber.ToString();
+			}
 			set { _phoneNumber = Customers.PhoneNumber.Parse(value); }
 		}
 

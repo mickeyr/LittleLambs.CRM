@@ -5,7 +5,6 @@ using FluentAssertions;
 using LittleLambs.CRM.Core.Customers;
 using LittleLambs.CRM.Core.Customers.Commands;
 using LittleLambs.CRM.Core.Customers.Queries;
-using MediatR;
 using Xunit;
 
 namespace LittleLambs.CRM.Tests.Customers
